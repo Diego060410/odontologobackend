@@ -76,15 +76,19 @@ public class CitaController {
                 .getNombreConsultorio();
 
         // ✅ ENVIAR CORREO
-        emailService.enviarCorreoCita(
-                correoPaciente,
-                nombrePaciente,
-                fecha,
-                hora,
-                odontologo,
-                sede,
-                consultorio
-        );
+        try {
+            emailService.enviarCorreoCita(
+                    correoPaciente,
+                    nombrePaciente,
+                    fecha,
+                    hora,
+                    odontologo,
+                    sede,
+                    consultorio
+            );
+        } catch (Exception e) {
+            System.err.println("❌ Error enviando correo: " + e.getMessage());
+        }
 
         // ✅ RESPUESTA
         return ResponseEntity
