@@ -6,6 +6,7 @@ import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class EmailServiceSendGridImpl implements EmailService {
     @Value("${sendgrid.api.key}")
     private String apiKey;
 
+    @Async
     @Override
     public void enviarCorreoCita(
             String destino,
@@ -27,7 +29,7 @@ public class EmailServiceSendGridImpl implements EmailService {
             String consultorio
     ) {
 
-        Email from = new Email("odontonova@gmail.com");
+        Email from = new Email("odontonovasistema@gmail.com");
         Email to = new Email(destino);
 
         String subject = "🦷 Confirmación de Cita Odontológica";
