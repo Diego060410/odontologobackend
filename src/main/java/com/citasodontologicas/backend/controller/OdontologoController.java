@@ -21,6 +21,16 @@ public class OdontologoController {
 
     private final OdontologoService odontologoService;
 
+    @GetMapping("/usuario/{idUsuario}")
+    @Operation(summary = "Obtener odontólogo por id de usuario")
+    public ResponseEntity<Odontologo> obtenerPorUsuario(
+            @PathVariable Integer idUsuario
+    ) {
+        Odontologo odontologo = odontologoService.obtenerPorUsuario(idUsuario);
+        return ResponseEntity.ok(odontologo);
+    }
+
+
     @GetMapping
     @Operation(summary = "Listar odontólogos")
     public ResponseEntity<List<Odontologo>> listar() {
@@ -50,5 +60,16 @@ public class OdontologoController {
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         odontologoService.eliminar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/consultorio/{idConsultorio}")
+    public ResponseEntity<List<Odontologo>> listarPorConsultorio(
+            @PathVariable Integer idConsultorio
+    ) {
+
+        List<Odontologo> lista =
+                odontologoService.listarPorConsultorio(idConsultorio);
+
+        return ResponseEntity.ok(lista);
     }
 }

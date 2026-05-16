@@ -11,9 +11,13 @@ public interface OdontologoService {
 
     Odontologo obtenerPorId(Integer id);
 
+    Odontologo obtenerPorUsuario(Integer idUsuario);
+
     Odontologo guardar(OdontologoRequest request);
 
     Odontologo actualizar(Integer id, OdontologoRequest request);
+
+    List<Odontologo> listarPorConsultorio(Integer idConsultorio);
 
     void eliminar(Integer id);
 }

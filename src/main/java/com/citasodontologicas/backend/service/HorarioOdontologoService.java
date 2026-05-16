@@ -9,6 +9,8 @@ public interface HorarioOdontologoService {
 
     List<HorarioOdontologo> listar();
 
+    List<HorarioOdontologo> listarPorOdontologo(Integer idOdontologo);
+
     HorarioOdontologo obtenerPorId(Integer id);
 
     HorarioOdontologo guardar(HorarioOdontologoRequest request);

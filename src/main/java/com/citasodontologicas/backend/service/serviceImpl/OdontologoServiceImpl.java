@@ -34,6 +34,18 @@ public class OdontologoServiceImpl implements OdontologoService {
                 .orElseThrow(() -> new ResourceNotFoundException("Odontólogo no encontrado con id: " + id));
     }
 
+    public Odontologo obtenerPorUsuario(Integer idUsuario){
+        return odontologoRepository.findByUsuarioIdUsuario(idUsuario)
+                .orElseThrow(() -> new RuntimeException(
+                        "Odontólogo no encontrado para usuario id: " + idUsuario
+                ));
+    }
+
+    @Override
+    public List<Odontologo> listarPorConsultorio(Integer idConsultorio) {
+        return odontologoRepository.listarPorConsultorio(idConsultorio);
+    }
+
     @Override
     public Odontologo guardar(OdontologoRequest request) {
         if (odontologoRepository.existsByNumeroColegiatura(request.getNumeroColegiatura())) {

@@ -4,10 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "horario_odontologo")
+@Table(name = "horario_odontologo", uniqueConstraints = {
+        // Esto evita que el mismo odontólogo tenga dos registros a la misma hora el mismo día
+        @UniqueConstraint(columnNames = {"id_odontologo", "fecha", "hora_inicio"})
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,12 +30,20 @@ public class HorarioOdontologo {
     private Odontologo odontologo;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_consultorio", nullable = false)
+    @JsonIgnoreProperties({"citas", "horarios", "odontologo", "sede"})
+    private Consultorio consultorio;
+
+    @Column(name = "fecha", nullable = false)
+    private LocalDate fecha; // Ya está perfecto
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_sede", nullable = false)
     @JsonIgnoreProperties({"consultorios", "horarios", "citas"})
     private Sede sede;
 
-    @Column(name = "dia_semana", nullable = false, length = 20)
-    private String diaSemana;
+    @Column(name = "dia_semana", length = 20)
+    private String diaSemana; // Ahora es opcional, ya que manda la fecha
 
     @Column(name = "hora_inicio", nullable = false)
     private LocalTime horaInicio;

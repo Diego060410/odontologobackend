@@ -71,11 +71,18 @@ public class Cita {
     @JoinColumn(name = "registrado_por")
     private Usuario registradoPor;
 
+    // HISTORIAL
     @OneToMany(mappedBy = "cita", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<HistorialCita> historial;
 
+    // NOTIFICACIONES
     @OneToMany(mappedBy = "cita", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Notificacion> notificaciones;
+
+    // 🔥 RELACIÓN CLAVE: PAGOS
+    @OneToMany(mappedBy = "cita", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Pago> pagos;
 }

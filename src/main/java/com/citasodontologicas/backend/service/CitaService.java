@@ -9,7 +9,11 @@ public interface CitaService {
 
     List<Cita> listar();
 
+    List<Cita> listarPorOdontologo(Integer idOdontologo);
+
     Cita obtenerPorId(Integer id);
+
+    Cita actualizarEstado(Integer id, Integer idEstado);
 
     Cita guardar(CitaRequest request);
 

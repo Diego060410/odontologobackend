@@ -27,6 +27,15 @@ public class HorarioOdontologoController {
         return ResponseEntity.ok(horarioOdontologoService.listar());
     }
 
+    @GetMapping("/odontologo/{idOdontologo}")
+    public ResponseEntity<List<HorarioOdontologo>> listarPorOdontologo(
+            @PathVariable Integer idOdontologo
+    ) {
+        return ResponseEntity.ok(
+                horarioOdontologoService.listarPorOdontologo(idOdontologo)
+        );
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Obtener horario por id")
     public ResponseEntity<HorarioOdontologo> obtenerPorId(@PathVariable Integer id) {
@@ -51,4 +60,6 @@ public class HorarioOdontologoController {
         horarioOdontologoService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }
